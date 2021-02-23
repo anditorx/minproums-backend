@@ -16,6 +16,21 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="/dashboard/users" :active="request()->routeIs('dashboard/users')">
+                        {{ __('Store Admin') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="/dashboard/customers" :active="request()->routeIs('dashboard/customers')">
+                        {{ __('Customers') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="/dashboard/products" :active="request()->routeIs('dashboard/products')">
+                        {{ __('Products') }}
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

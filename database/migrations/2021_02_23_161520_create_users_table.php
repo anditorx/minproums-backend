@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('city')->nullable();
-            $table->string('roles')->default('seller');
+            $table->string('roles')->default('admin');
             $table->string('is_logged')->default('not');
 
             $table->timestamps();
