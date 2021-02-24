@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Actions\Fortify\PasswordValidationRules;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UserEditRequest extends FormRequest
 {
     use PasswordValidationRules;
     /**
@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required','string','max:255'], 
-            'email' => ['required','email','max:255', 'unique:users'], 
+            // 'email' => ['required','email','max:255', 'unique:users'], 
             'password' => $this->passwordRules(), 
             'address' => ['string'],
             'roles' => ['required','string','max:255','in:admin'],

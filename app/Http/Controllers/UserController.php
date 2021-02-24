@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Fortify\PasswordValidationRules;
+use App\Helpers\ResponseFormatter;
+use App\Http\Requests\UserEditRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    use PasswordValidationRules;
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +46,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
         // dd($data);
 
         $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user','public');
@@ -67,9 +74,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        // dd($user);
+        return view('users.edit',[
+            'item' => $user
+        ]);
     }
 
     /**
@@ -79,9 +89,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserEditRequest $request, User $user)
     {
-        //
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+        
+        if ($request->file('profile_photo_path')) {
+            $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user','public');
+        }
+
+        $user->update($data);
+        return redirect()->route('users.index');
     }
 
     /**
