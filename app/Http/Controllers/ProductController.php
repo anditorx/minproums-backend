@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::paginate(10);
+        // $product = Product::paginate(10);
+        $product = DB::table('products')->where('deleted_at', '=', NULL)->orderBy('id', 'desc')->paginate(10);
         return view('products.index', [
             'product' => $product
         ]);
@@ -66,9 +68,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', [
+            'item' => $product,
+        ]);
     }
 
     /**
@@ -78,9 +82,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $data = $request->all();
+        if ($request->file('picture_path')) {
+            $data['picture_path'] = $request->file('picture_path')->store('assets/product','public');
+        }
+
+        $product->update($data);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -89,8 +99,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
