@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -49,7 +50,11 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->first();
+        // dd($user);
+        return view('customers.detail',[
+            'item' => $user
+        ]);
     }
 
     /**

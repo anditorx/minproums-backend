@@ -36,10 +36,6 @@
                           <td class="border px-6 py-4">{{ Str::upper($item->city) }}</td>
                           <td class="border px-6 py-4 text-center">
                             <a href="{{ route('customers.show', $item->id) }}" class="iniline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Detail</a>
-                            {{-- <form action="{{ route('customers.destroy', $item->id) }}" method="POST" class="inline-block">
-                              {!! method_field('delete') .csrf_field() !!}
-                              <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">Delete</button>
-                            </form> --}}
                           </td>
                         </tr>
                     @endif
