@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.index');
+        return view('products.create');
     }
 
     /**
@@ -36,9 +37,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+
+        $data['picture_path'] = $request->file('picture_path')->store('assets/product','public');
+
+        Product::create($data);
+
+        return redirect()->route('products.index');
     }
 
     /**

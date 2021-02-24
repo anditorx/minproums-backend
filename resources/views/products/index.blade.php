@@ -26,16 +26,17 @@
                 <tbody>
                   @php
                       $no = 1;
+                      
                   @endphp
                   @forelse ($product as $item)
                     <tr>
                       <td class="border px-6 py-4">{{ $no++ }}</td>
                       <td class="border px-6 py-4">
-                        <img src="{{ $item->picture_path }}" alt="">
+                        <img src="{{ $item->picture_path }}" alt="" class="w-full h-full rounded">
                       </td>
                       <td class="border px-6 py-4">{{ $item->code }}</td>
                       <td class="border px-6 py-4">{{ $item->name }}</td>
-                      <td class="border px-6 py-4">{{ $item->category }}</td>
+                      <td class="border px-6 py-4">{{ Str::upper($item->category) }}</td>
                       <td class="border px-6 py-4">@currency($item->price)</td>
                       <td class="border px-6 py-4 text-center">
                         <a href="{{ route('customers.edit', $item->id) }}" class="iniline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit</a>
