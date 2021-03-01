@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TransactionItem extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
-        'invoice', 'product_code'
+        'invoice', 'product_code', 'qty'
     ];
 
     public function transaction()

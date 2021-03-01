@@ -24,6 +24,14 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('logout/{id}', [UserController::class, 'logout']);
 
     Route::get('transaction', [TransactionController::class, 'all']);
+    Route::post('transaction/addToCart', [TransactionController::class, 'addToCart']);
+    Route::get('transaction/getItemCart', [TransactionController::class, 'getItemCart']);
+    Route::post('transaction/deletItemOnCart', [TransactionController::class, 'deletItemOnCart']);
+    Route::post('transaction/updateAddQty', [TransactionController::class, 'updateAddQty']);
+    Route::post('transaction/updateMinusQty', [TransactionController::class, 'updateMinusQty']);
+    Route::post('transaction/updateStatusPayment', [TransactionController::class, 'updateStatusPayment']);
+    Route::post('transaction/getTotalPrice', [TransactionController::class, 'getTotalPrice']);
+    Route::post('transaction/updateStatusPaymentConfirm', [TransactionController::class, 'updateStatusPaymentConfirm']);
     Route::post('transaction/{id}', [TransactionController::class, 'update']);
 });
 
