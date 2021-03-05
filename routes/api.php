@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\ProductDuaController;
 use App\Http\Controllers\API\TransactionController;
+use App\Http\Controllers\API\TransactionDuaController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +41,9 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 
 Route::get('product', [ProductController::class, 'all']);
+
+Route::get('transactionDua', [TransactionDuaController::class, 'all']);
+Route::get('productDua', [ProductDuaController::class, 'all']);
+Route::post('transactionDua/addToCart', [TransactionDuaController::class, 'addToCart']);
+Route::get('transactionDua/getCart', [TransactionDuaController::class, 'getCart']);
+Route::post('transactionDua/updateCart', [TransactionDuaController::class, 'updateCart']);
